@@ -7,7 +7,7 @@ import {
 
 const HomeBackground = ({ children }) => (
   <ImageBackground
-    source={require('../assets/whiteback.jpg')}
+    source={require('../assets/blackble.jpg')}
    
     style={styles.background}
   >

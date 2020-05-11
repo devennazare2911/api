@@ -14,32 +14,33 @@ import Header from '../components/Header';
 import Paragraph from '../components/Paragraph';
 import Button from '../components/Button';
 import { theme } from '../core/theme';
-import { Profile } from '.';
+import {Dashboard} from '.';
 import { Search } from '.';
 import { Messages } from '.';
 
 
-export default class Dashboard extends Component {
+export default class Profile extends Component {
   constructor() {
     super()
     this.state = {
-      page: "Dashboard",
+      page: "Profile",
     }
   }
 
   render() {
     return (
 
-      <View style={styles.container}>
+      <View style={styles.container2}>
               <Logo />
-              <Text> Home </Text>
+              <Text> Profile </Text>
 
 
         {
           // if you are using react-navigation just pass the navigation object in your components like this:
           // {this.state.page === "HomeScreen" && <MyComp navigation={this.props.navigation}>Screen1</MyComp>}
         }
-        {this.state.page === "Profile" && <Profile navigation={this.props.navigation}>Profile</Profile>}
+                {this.state.page === "Dashboard" && <Dashboard navigation={this.props.navigation}></Dashboard>}
+
         {this.state.page === "Search" && <Search navigation={this.props.navigation}>Search</Search>}
         {this.state.page === "Messages" && <Messages navigation={this.props.navigation}>Messages</Messages>}
 
@@ -81,7 +82,7 @@ export default class Dashboard extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
+  container2: {
+    flex: 2
   }
 });

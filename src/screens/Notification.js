@@ -14,35 +14,28 @@ import Header from '../components/Header';
 import Paragraph from '../components/Paragraph';
 import Button from '../components/Button';
 import { theme } from '../core/theme';
-import { Profile } from '.';
-import { Search } from '.';
-import { Messages } from '.';
 
-
-export default class Dashboard extends Component {
+export default class Notification extends Component {
   constructor() {
     super()
     this.state = {
-      page: "Dashboard",
+      page: "Notification",
     }
   }
 
   render() {
     return (
-
       <View style={styles.container}>
-              <Logo />
-              <Text> Home </Text>
-
 
         {
           // if you are using react-navigation just pass the navigation object in your components like this:
           // {this.state.page === "HomeScreen" && <MyComp navigation={this.props.navigation}>Screen1</MyComp>}
         }
-        {this.state.page === "Profile" && <Profile navigation={this.props.navigation}>Profile</Profile>}
-        {this.state.page === "Search" && <Search navigation={this.props.navigation}>Search</Search>}
-        {this.state.page === "Messages" && <Messages navigation={this.props.navigation}>Messages</Messages>}
-
+        {this.state.page === "Dashboard" && <Text>Dashboard</Text>}
+        {this.state.page === "Profile" && <Text>Profile</Text>}
+        {this.state.page === "Message" && <Text>Message</Text>}
+        {this.state.page === "Notification" && <Text>Notification</Text>}
+        {this.state.page === "Search" && <Text>Search</Text>}
 
         <Tabbar
           stateFunc={(tab) => {
@@ -52,7 +45,7 @@ export default class Dashboard extends Component {
           activePage={this.state.page}
           tabs={[
             {
-              page: "Dashboard",
+              page: "HomeScreen",
               icon: "home",
             },
             {
@@ -61,16 +54,16 @@ export default class Dashboard extends Component {
               badgeNumber: 11,
             },
             {
-              page: "Profile",
+              page: "ProfileScreen",
               icon: "person",
             },
             {
-              page: "Message",
+              page: "ChatScreen",
               icon: "chatbubbles",
               badgeNumber: 7,
             },
             {
-              page: "Search",
+              page: "SearchScreen",
               icon: "search",
             },
           ]}
