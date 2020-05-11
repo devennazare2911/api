@@ -14,10 +14,6 @@ import Header from '../components/Header';
 import Paragraph from '../components/Paragraph';
 import Button from '../components/Button';
 import { theme } from '../core/theme';
-import {Dashboard} from '.';
-import { Search } from '.';
-import { Messages } from '.';
-
 
 export default class Profile extends Component {
   constructor() {
@@ -29,21 +25,20 @@ export default class Profile extends Component {
 
   render() {
     return (
+      <View style={styles.container}>
+                      <Logo />
+                      <Text> Search </Text>
 
-      <View style={styles.container2}>
-              <Logo />
-              <Text> Profile </Text>
-
+                      <Logo />
+                      <Logo />
 
         {
           // if you are using react-navigation just pass the navigation object in your components like this:
           // {this.state.page === "HomeScreen" && <MyComp navigation={this.props.navigation}>Screen1</MyComp>}
         }
-                {this.state.page === "Dashboard" && <Dashboard navigation={this.props.navigation}></Dashboard>}
-
-        {this.state.page === "Search" && <Search navigation={this.props.navigation}>Search</Search>}
+    {this.state.page === "Profile" && <Profile navigation={this.props.navigation}>Profile</Profile>}
+        {this.state.page === "Dashboard" && <Dashboard navigation={this.props.navigation}>Dashboard</Dashboard>}
         {this.state.page === "Messages" && <Messages navigation={this.props.navigation}>Messages</Messages>}
-
 
         <Tabbar
           stateFunc={(tab) => {
@@ -66,7 +61,7 @@ export default class Profile extends Component {
               icon: "person",
             },
             {
-              page: "Message",
+              page: "Messages",
               icon: "chatbubbles",
               badgeNumber: 7,
             },
@@ -82,7 +77,7 @@ export default class Profile extends Component {
 }
 
 const styles = StyleSheet.create({
-  container2: {
-    flex: 2
+  container: {
+    flex: 1
   }
 });

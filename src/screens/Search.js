@@ -1,83 +1,23 @@
-import React, { memo , Component } from 'react';
-import Background from '../components/Background';
-import HomeBackground from '../components/HomeBackground';
-import Tabbar from 'react-native-tabbar-bottom'
-import {
-  ImageBackground,
-  StyleSheet,
-  View,
-  Text,
-  KeyboardAvoidingView,
-} from 'react-native';
-import Logo from '../components/Logo';
-import Header from '../components/Header';
-import Paragraph from '../components/Paragraph';
-import Button from '../components/Button';
-import { theme } from '../core/theme';
+import React , {Component} from 'react';  
+import {StyleSheet, Text, View,Button} from 'react-native';  
+import { createBottomTabNavigator, createAppContainer} from 'react-navigation';  
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';  
+import Icon from 'react-native-vector-icons/Ionicons';  
+import { ModernHeader } from "@freakycoder/react-native-header-view";
 
-export default class Search extends Component {
-  constructor() {
-    super()
-    this.state = {
-      page: "Search",
-    }
-  }
+export default class SearchScreen extends React.Component {  
+  render() {  
+      return (  
+        <ModernHeader  text="Search"/>
 
-  render() {
-    return (
-      <View style={styles.container}>
-                      <Logo />
-                      <Text> Search </Text>
+      );  
+  }  
+}  
+  const styles = StyleSheet.create({  
+    container: {  
+        flex: 1,  
+        justifyContent: 'center',  
+        alignItems: 'center'  
+    },  
+});  
 
-                      <Logo />
-                      <Logo />
-
-        {
-          // if you are using react-navigation just pass the navigation object in your components like this:
-          // {this.state.page === "HomeScreen" && <MyComp navigation={this.props.navigation}>Screen1</MyComp>}
-        }
-    {this.state.page === "Profile" && <Profile navigation={this.props.navigation}>Profile</Profile>}
-        {this.state.page === "Dashboard" && <Dashboard navigation={this.props.navigation}>Dashboard</Dashboard>}
-        {this.state.page === "Messages" && <Messages navigation={this.props.navigation}>Messages</Messages>}
-
-        <Tabbar
-          stateFunc={(tab) => {
-            this.setState({page: tab.page})
-            //this.props.navigation.setParams({tabTitle: tab.title})
-          }}
-          activePage={this.state.page}
-          tabs={[
-            {
-              page: "Dashboard",
-              icon: "home",
-            },
-            {
-              page: "NotificationScreen",
-              icon: "notifications",
-              badgeNumber: 11,
-            },
-            {
-              page: "Profile",
-              icon: "person",
-            },
-            {
-              page: "Messages",
-              icon: "chatbubbles",
-              badgeNumber: 7,
-            },
-            {
-              page: "Search",
-              icon: "search",
-            },
-          ]}
-        />
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  }
-});

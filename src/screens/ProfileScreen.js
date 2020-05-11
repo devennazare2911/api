@@ -5,14 +5,14 @@ import { createMaterialBottomTabNavigator } from 'react-navigation-material-bott
 import Icon from 'react-native-vector-icons/Ionicons';  
 import { ModernHeader } from "@freakycoder/react-native-header-view";
 
-export default class ImageScreen extends React.Component {  
-  render() {  
+export default class ProfileScreen extends Component {  
+    render() {  
       return (  
-        <ModernHeader  text="Inbox"/>
+        <ModernHeader  text="Profile"/>
 
       );  
+    }  
   }  
-}  
   const styles = StyleSheet.create({  
     container: {  
         flex: 1,  

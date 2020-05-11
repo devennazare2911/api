@@ -11,6 +11,8 @@ import {
   Messages,
   Notfication,
   Search,
+  ProfileScreen
+  
 
 } from './screens';
 
@@ -24,6 +26,8 @@ const Router = createStackNavigator(
     Profile,
     Messages,
     Search,
+    ProfileScreen
+
 
   },
   {
