@@ -1,5 +1,5 @@
 import React from 'react';  
-import {StyleSheet, Text, View,Button} from 'react-native';  
+import {StyleSheet, Text, View,Animated , Easing, Button} from 'react-native';  
 import { createBottomTabNavigator, createAppContainer} from 'react-navigation';  
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';  
 import Icon from 'react-native-vector-icons/Ionicons';  
@@ -7,19 +7,46 @@ import ProfileScreen from './ProfileScreen';
 import Search from './Search';
 import Messages from './Messages';
 import { ModernHeader } from "@freakycoder/react-native-header-view";
-import { GorgeousHeader } from "@freakycoder/react-native-header-view";
-import { AppleHeader } from "@freakycoder/react-native-header-view";
 
 
- class Dashboard extends React.Component {  
-  render() {  
-    return (  
-    <ModernHeader  text="Home"/>
 
+ class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { spinAnim: new Animated.Value(0) }
+  }
 
-    );  
-  }  
-}  
+ componentDidMount(){
+ Animated.loop(Animated.timing(
+    this.state.spinAnim,
+  {
+    toValue: 1,
+    duration: 1300,
+    easing: Easing.linear,
+    useNativeDriver: true
+  }
+)).start();
+ }
+
+  render() {
+    const spin = this.state.spinAnim.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['0deg', '360deg']
+    });
+    return (
+     
+      <View style={styles.container}>  
+        <ModernHeader  style ={styles.header} text="Home" />
+
+        <Animated.Image
+        style={{alignItems: 'center' ,height:200, width: 200,transform: [{rotate: spin}] }}
+        source={require('../assets/reactrotate.png')} />
+        <Text > Hello </Text>
+      </View>
+
+    );
+  }
+}
 
 
 
@@ -31,12 +58,19 @@ import { AppleHeader } from "@freakycoder/react-native-header-view";
 const styles = StyleSheet.create({  
   container: {  
       flex: 1,  
-      justifyContent: 'center',  
-      alignItems: 'center'  
+      alignItems: 'center'  ,
+      backgroundColor: '#FFFFFF',
+
   },  
+  image: {  
+    flex: 1,  
+    alignItems: 'center'  ,
+    },  
+
   header: {
-    flex: 1,
-    fontSize: 40,
+    flex: 2,
+    paddingTop: 50,
+
   }
 }); 
 
@@ -104,7 +138,7 @@ const styles = StyleSheet.create({
       
   },  
   {  
-    initialRouteName: "Home",  
+    initialRouteName: "Image",  
     activeColor: '#f0edf6',  
     inactiveColor: '#226557',  
     barStyle: { backgroundColor: '#3BAD87' },  

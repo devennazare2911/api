@@ -49,7 +49,7 @@ const LoginScreen = ({ navigation }) => {
 
       <TextInput
         label="Password"
-        returnKeyType="Done"
+        returnKeyType="done"
         value={password.value}
         onChangeText={text => setPassword({ value: text, error: '' })}
         error={!!password.error}

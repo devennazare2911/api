@@ -4,11 +4,26 @@ import { createBottomTabNavigator, createAppContainer} from 'react-navigation';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';  
 import Icon from 'react-native-vector-icons/Ionicons';  
 import { ModernHeader } from "@freakycoder/react-native-header-view";
+import { SearchBar } from 'react-native-elements';
+
 
 export default class SearchScreen extends React.Component {  
+  state = {
+    search: '',
+  };
+
+  updateSearch = search => {
+    this.setState({ search });
+  };
   render() {  
+    const { search } = this.state;
+
       return (  
-        <ModernHeader  text="Search"/>
+        <SearchBar style = {{ paddingTop: 35 }}
+        placeholder="Search Here..."
+        onChangeText={this.updateSearch}
+        value={search}
+      />
 
       );  
   }  
