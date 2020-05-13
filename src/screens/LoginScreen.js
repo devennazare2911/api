@@ -1,103 +1,92 @@
-import React, { memo, useState } from 'react';
-import { TouchableOpacity, StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { View, StyleSheet, TouchableOpacity,Text } from 'react-native';
+import Firebase from '../../config/firebase';
 import Background from '../components/Background';
 import Logo from '../components/Logo';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import TextInput from '../components/TextInput';
 import BackButton from '../components/BackButton';
+
+
 import { theme } from '../core/theme';
-import { emailValidator, passwordValidator } from '../core/utils';
 
-const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState({ value: '', error: '' });
-  const [password, setPassword] = useState({ value: '', error: '' });
 
-  const _onLoginPressed = () => {
-    const emailError = emailValidator(email.value);
-    const passwordError = passwordValidator(password.value);
 
-    if (emailError || passwordError) {
-      setEmail({ ...email, error: emailError });
-      setPassword({ ...password, error: passwordError });
-      return;
+class LoginScreen extends React.Component {
+    state = {
+        email: '',
+        password: ''
     }
+    handleLogin = () => {
+      const { email, password } = this.state
 
-    navigation.navigate('Dashboard');
-  };
+      Firebase.auth()
+          .signInWithEmailAndPassword(email, password)
+          .then(() => this.props.navigation.navigate('Dashboard'))
+          .catch(error => console.log(error))
+    }
+    render() {
+        return (
+          <Background>
+       <BackButton goBack={() => navigation.navigate('HomeScreen')} />
 
-  return (
-    <Background>
-      <BackButton goBack={() => navigation.navigate('HomeScreen')} />
+             <Logo />
 
-      <Logo />
+            <Header>Welcome back.</Header>
 
-      <Header>Welcome back.</Header>
-
-      <TextInput
-        label="Email"
-        returnKeyType="next"
-        value={email.value}
-        onChangeText={text => setEmail({ value: text, error: '' })}
-        error={!!email.error}
-        errorText={email.error}
-        autoCapitalize="none"
-        autoCompleteType="email"
-        textContentType="emailAddress"
-        keyboardType="email-address"
-      />
-
-      <TextInput
-        label="Password"
-        returnKeyType="done"
-        value={password.value}
-        onChangeText={text => setPassword({ value: text, error: '' })}
-        error={!!password.error}
-        errorText={password.error}
-        secureTextEntry
-      />
-
-      <View style={styles.forgotPassword}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('ForgotPasswordScreen')}
-        >
-          <Text style={styles.label}>Forgot your password?</Text>
-        </TouchableOpacity>
-      </View>
-
-      <Button mode="contained" onPress={_onLoginPressed}>
-        Login
-      </Button>
-
-      <View style={styles.row}>
-        <Text style={styles.label}>Don’t have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen')}>
-          <Text style={styles.link}>Sign up</Text>
-        </TouchableOpacity>
-      </View>
-    </Background>
-  );
-};
-
+          <TextInput
+         label="Email"
+         returnKeyType="next" 
+                    value={this.state.email}
+                    onChangeText={email => this.setState({ email })}
+                    autoCapitalize="none"
+                    autoCompleteType="email"
+                    textContentType="emailAddress"
+                    keyboardType="email-address"
+                />
+                <TextInput
+                 label="Password"
+                 returnKeyType="done"
+                    value={this.state.password}
+                    onChangeText={password => this.setState({ password })}
+                    placeholder='Password'
+                    secureTextEntry={true}
+                />
+                        <Button mode="contained" onPress={this.handleLogin}style={styles.button}>
+                        Login
+                       </Button>
+                  <View style={styles.row}>
+                    <Text style={styles.label}>Don’t have an account? </Text>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('RegisterScreen')}>
+                      <Text style={styles.link}>Sign up</Text>
+                    </TouchableOpacity>
+                  </View>
+                </Background>
+        )
+    }
+}
 const styles = StyleSheet.create({
-  forgotPassword: {
-    width: '100%',
-    alignItems: 'flex-end',
-    marginBottom: 24,
+  label: {
+    color: '#cbd9df',
+    fontSize: 17
+
+  },
+  button: {
+    marginTop: 24,
   },
   row: {
     flexDirection: 'row',
     marginTop: 4,
-  },
-  label: {
-    color: '#cbd9df',
-    fontSize: 17
+
   },
   link: {
     fontWeight: 'bold',
-    color: '#00FFFF',
+    color: theme.colors.primary,
     fontSize: 17,
+    color: '#00FFFF',
+
   },
 });
 
-export default memo(LoginScreen);
+export default LoginScreen
