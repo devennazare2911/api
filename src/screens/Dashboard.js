@@ -1,47 +1,88 @@
 import React from 'react';  
-import {StyleSheet, Text, View,Animated , Easing, Button} from 'react-native';  
-import { createBottomTabNavigator, createAppContainer} from 'react-navigation';  
+import {StyleSheet, Text, View,Animated , Easing,ActivityIndicator, Button} from 'react-native';  
+import { createBottomTabNavigator, createAppContainer, SceneView} from 'react-navigation';  
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';  
 import Icon from 'react-native-vector-icons/Ionicons';  
 import ProfileScreen from './ProfileScreen';
 import Search from './Search';
 import Messages from './Messages';
 import { ModernHeader } from "@freakycoder/react-native-header-view";
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 
  class Dashboard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { spinAnim: new Animated.Value(0) }
-  }
+    constructor(props){
+      super(props)
+      this.state = {
+        isLoading: true,
+        dataSource : null,
+      }
+    }
+    componentDidMount(){
+      return fetch ('http://dummy.restapiexample.com/api/v1/employees')
+      .then((response) => response.json())
+      .then ((responseJson)=> {
+        this.setState({
+          isLoading: false,
+          dataSource: responseJson.data,
+        })
 
- componentDidMount(){
- Animated.loop(Animated.timing(
-    this.state.spinAnim,
-  {
-    toValue: 1,
-    duration: 1300,
-    easing: Easing.linear,
-    useNativeDriver: true
-  }
-)).start();
- }
+      })
+      .catch((error) => {
+        console.log(error)
+      });
+
+    }
+ 
 
   render() {
-    const spin = this.state.spinAnim.interpolate({
-      inputRange: [0, 1],
-      outputRange: ['0deg', '360deg']
-    });
+    if (this.state.isLoading){
+      return(
+        <View style={styles.container2}>
+          <ActivityIndicator/>
+        </View>
+
+
+      )
+    }
+
+    else{
+      let data = this.state.dataSource.map((val,key) => {
+        return (
+        
+        <View key = {key} style ={styles.item }>
+                    <Text style = {{fontWeight: '200',fontSize: 20 , }}> Sr No .{val.id}</Text>
+
+          <Text style = {{paddingTop: 20, fontWeight: 'bold'}}>Name :{val.employee_name}</Text>
+          <Text style = {{fontSize: 30 , fontWeight: '200',paddingTop: 30}} >  Salary: {val.employee_salary}</Text>
+       
+        </View>
+        );
+
+      });
+
+
+      return(        <ScrollView>
+
+        <View style ={styles.container2}>
+                  <ModernHeader  style ={styles.header} text="Home" />
+                {data}
+
+        </View>
+        </ScrollView>
+      );
+    }
+
+ 
+
+
     return (
      
       <View style={styles.container}>  
         <ModernHeader  style ={styles.header} text="Home" />
 
-        <Animated.Image
-        style={{alignItems: 'center' ,height:200, width: 200,transform: [{rotate: spin}] }}
-        source={require('../assets/reactrotate.png')} />
-        <Text > Hello </Text>
+       
       </View>
 
     );
@@ -62,6 +103,24 @@ const styles = StyleSheet.create({
       backgroundColor: '#FFFFFF',
 
   },  
+
+  item :{
+    flex :1 ,
+    alignSelf: 'stretch',
+    alignItems: 'center'  ,
+      backgroundColor: '#FFFFFF',
+      margin :10 ,
+      borderBottomWidth: 1 ,
+      borderBottomColor : '#eeeeee'
+  },
+
+  container2 :{
+    flex: 1,  
+    alignItems: 'center'  ,
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center'
+
+  },
   image: {  
     flex: 1,  
     alignItems: 'center'  ,
@@ -138,7 +197,7 @@ const styles = StyleSheet.create({
       
   },  
   {  
-    initialRouteName: "Image",  
+    initialRouteName: "Home",  
     activeColor: '#f0edf6',  
     inactiveColor: '#226557',  
     barStyle: { backgroundColor: '#3BAD87' },  

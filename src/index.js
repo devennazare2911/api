@@ -31,7 +31,7 @@ const Router = createStackNavigator(
 
   },
   {
-    initialRouteName: 'Dashboard',
+    initialRouteName: 'RegisterScreen',
     headerMode: 'none',
   }
 );
