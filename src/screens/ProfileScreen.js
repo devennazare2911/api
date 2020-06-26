@@ -1,5 +1,5 @@
 import React , {Component,useState} from 'react';  
-import {StyleSheet,TouchableOpacity, Text, Image, Platform,
+import {StyleSheet,TouchableOpacity,SafeAreaView, Text, Image, Platform,
   ScrollViewView , View ,Animated,ScrollView ,FlatList , Modal}from 'react-native';  
 import { createBottomTabNavigator, navigation , navigate } from 'react-navigation';  
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';  
@@ -8,6 +8,7 @@ import Button from '../components/Button';
 import { StackNavigator } from 'react-navigation';
 import AnimateNumber from 'react-native-animate-number';
 import FastImage from 'react-native-fast-image';
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
   
 export default class ProfileScreen extends Component {
@@ -19,6 +20,11 @@ export default class ProfileScreen extends Component {
     alert(this.state.showGrid);
     //this.setState({showGrid:!this.state.showGrid});
   }
+  handleLogintoInbox = () => {
+    this.props.navigation.navigate('Messages')
+      
+       
+ }
   componentDidMount() {
     var that = this;
     let items = Array.apply(null, Array(60)).map((v, i) => {
@@ -31,151 +37,207 @@ export default class ProfileScreen extends Component {
 
   render() {
     return (
-      <ScrollView>
-      <View style={styles.container}>
-      <ModernHeader text ="Profile"/>
-          <View style={styles.header}></View>
-          <Image style={styles.avatar}source={require('../assets/reactrotate.png')}/>
-          <Text style = {{fontSize:20, marginTop:175, marginLeft: 30 , position: 'absolute',
-    color:'#FFFFFF' }} >Deven Nazare</Text>
+      <SafeAreaView style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.titleBar}>
+              <Ionicons name="ios-arrow-back" size={24} color="#52575D"></Ionicons>
+              <Ionicons name="md-more" size={24} color="#52575D"></Ionicons>
+          </View>
 
+          <View style={{ alignSelf: "center" }}>
+              <View style={styles.profileImage}>
+                  <Image source={require("../assets/reactrotate.png")} style={styles.image} resizeMode="center"></Image>
+              </View>
+              <View style={styles.dm}>
+                  <MaterialIcons name="chat" size={18} onPress={this.handleLogintoInbox} color="#DFD8C8"></MaterialIcons>
+              </View>
+              <View style={styles.active}></View>
+              <View style={styles.add}>
+                  <Ionicons name="ios-add" size={48} color="#DFD8C8" style={{ marginTop: 6, marginLeft: 2 }}></Ionicons>
+              </View>
+          </View>
 
-          <Text style = {{fontSize:15, marginTop:125, marginLeft: 177 , position: 'absolute',
-    color:'#FFFFFF' }} >Followers</Text>
+          <View style={styles.infoContainer}>
+              <Text style={[styles.text, { fontWeight: "200", fontSize: 36 }]}>DEVEN NAZARE</Text>
+              <Text style={[styles.text, { color: "#AEB5BC", fontSize: 14 }]}>iOS Developer</Text>
+          </View>
 
-    <AnimateNumber  style = {{fontSize:25, marginTop:90, marginLeft: 180 , position: 'absolute',
-    color:'#FFFFFF' }} value={1036} countBy='10' timing="easeIn" />
+          <View style={styles.statsContainer}>
+              <View style={styles.statsBox}>
+                  <Text style={[styles.text, { fontSize: 24 }]}> <AnimateNumber value={483} countBy={9}timing="linear"/></Text>
+                  <Text style={[styles.text, styles.subText]}>Posts</Text>
+              </View>
+              <View style={[styles.statsBox, { borderColor: "#DFD8C8", borderLeftWidth: 1, borderRightWidth: 1 }]}>
+                  <Text style={[styles.text, { fontSize: 24 }]}><AnimateNumber value={45678} countBy={999}timing="linear"/></Text>
+                  <Text style={[styles.text, styles.subText]}>Followers</Text>
+              </View>
+              <View style={styles.statsBox}>
+                  <Text style={[styles.text, { fontSize: 24 }]}>302</Text>
+                  <Text style={[styles.text, styles.subText]}>Following</Text>
+              </View>
+          </View>
 
+          <View style={{ marginTop: 32 }}>
+              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                  <View style={styles.mediaImageContainer}>
+                      <Image source={require("../assets/media1.jpg")} style={styles.image} resizeMode="cover"></Image>
+                  </View>
+                  <View style={styles.mediaImageContainer}>
+                      <Image source={require("../assets/media2.jpg")} style={styles.image} resizeMode="cover"></Image>
+                  </View>
+                  <View style={styles.mediaImageContainer}>
+                      <Image source={require("../assets/media3.jpg")} style={styles.image} resizeMode="cover"></Image>
+                  </View>
+              </ScrollView>
+              <View style={styles.mediaCount}>
+                  <Text style={[styles.text, { fontSize: 24, color: "#DFD8C8", fontWeight: "300" }]}>70</Text>
+                  <Text style={[styles.text, { fontSize: 12, color: "#DFD8C8", textTransform: "uppercase" }]}>Media</Text>
+              </View>
+          </View>
+          <Text style={[styles.subText, styles.recent]}>Recent Activity</Text>
+          <View style={{ alignItems: "center" }}>
+              <View style={styles.recentItem}>
+                  <View style={styles.activityIndicator}></View>
+                  <View style={{ width: 250 }}>
+                      <Text style={[styles.text, { color: "#41444B", fontWeight: "300" }]}>
+                          Started following <Text style={{ fontWeight: "400" }}>Anket Nemlekar</Text> and <Text style={{ fontWeight: "400" }}>Ajay Kushwaha</Text>
+                      </Text>
+                  </View>
+              </View>
 
-    <Text style = {{fontSize:15, marginTop:125, marginLeft: 286 , position: 'absolute',
-    color:'#FFFFFF' }} >Posts</Text>
-
-    <AnimateNumber  style = {{fontSize:25, marginTop:90, marginLeft: 290 , position: 'absolute',
-    color:'#FFFFFF' }} value={69} countBy='10' timing="easeIn" />
-
-
-          <View style={styles.body}>
-            <View style={styles.bodyContent}>
-              
-              <Text style={styles.name}>Deven Nazare</Text>
-              <Text style={styles.info}>iOS developer</Text>
-              <Text style={styles.description}>Hola ! Messi</Text>
-              <Text style={styles.name}>Deven Nazare</Text>
-              <Text style={styles.info}>iOS  developer</Text>
-              <Text style={styles.description}>Hola ! Ronaldo</Text>
-              <Text style={styles.name}>Deven Nazare</Text>
-              <Text style={styles.info}>iOS  developer</Text>
-              <Text style={styles.description}>Hola ! Ronaldo</Text>
-              <Text style={styles.name}>Deven Nazare</Text>
-              <Text style={styles.info}>iOS  developer</Text>
-              <Text style={styles.description}>Hola ! Messi</Text>
-              <Text style={styles.name}>Deven Nazare</Text>
-              <Text style={styles.info}>iOS  developer</Text>
-              <Text style={styles.description}>Hola ! Messi</Text>
-              <Text style={styles.name}>Deven Nazare</Text>
-              <Text style={styles.info}>iOS  developer</Text>
-              <Text style={styles.description}>Hola ! Messi</Text>
-              <Text style={styles.name}>Deven Nazare</Text>
-              <Text style={styles.info}>iOS  developer</Text>
-              <Text style={styles.description}>Hola ! Messi</Text>
-              
-            </View>
-        </View>
-      </View>
+              <View style={styles.recentItem}>
+                  <View style={styles.activityIndicator}></View>
+                  <View style={{ width: 250 }}>
+                      <Text style={[styles.text, { color: "#41444B", fontWeight: "300" }]}>
+                          Started following <Text style={{ fontWeight: "400" }}>Luke Harper</Text>
+                      </Text>
+                  </View>
+              </View>
+          </View>
       </ScrollView>
+  </SafeAreaView>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  header:{
-    backgroundColor: "#000000",
-    height:130,
+  container: {
+      flex: 1,
+      backgroundColor: "#FFF"
   },
-  avatar: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    borderWidth: 4,
-    borderColor: "white",
-    marginBottom:10,
-    
-    position: 'absolute',
-    marginTop:66,
-    marginLeft: 30
-  },
-  name:{
-    fontSize:22,
-    color:"#000000",
-    fontWeight:'600',
-  },
-  body:{
-    marginTop:40,
-  },
-  bodyContent: {
-
-    flex: 1,
-    alignItems: 'center',
-    padding:30,
-  },
-  name:{
-    fontSize:28,
-    color: "#696969",
-    fontWeight: "600"
-  },
-  info:{
-    fontSize:16,
-    color: "#00BFFF",
-    marginTop:10
-  },
-  description:{
-    fontSize:16,
-    color: "#696969",
-    marginTop:10,
-    textAlign: 'center'
-  },
-  buttonContainer: {
-    marginTop:10,
-    height:45,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom:20,
-    width:250,
-    borderRadius:30,
-    backgroundColor: "#00BFFF",
-  },
-  textLarge: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  text: {
+      fontFamily: "HelveticaNeue",
+      color: "#52575D"
   },
   image: {
-    height: 70,
-    width: 100,
-    marginRight: 10,
+      flex: 1,
+      height: undefined,
+      width: undefined
   },
-  TouchableOpacityStyle: {
-    position: 'absolute',
-    width: 50,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    right: 30,
-    bottom: 30,
+  titleBar: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      marginTop: 24,
+      marginHorizontal: 16
   },
-  imageThumbnail: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 100,
+  subText: {
+      fontSize: 12,
+      color: "#AEB5BC",
+      textTransform: "uppercase",
+      fontWeight: "500"
   },
-  FloatingButtonStyle: {
-    resizeMode: 'contain',
-    width: 50,
-    height: 50,
-    //backgroundColor:'black'
+  profileImage: {
+      width: 200,
+      height: 200,
+      borderRadius: 100,
+      overflow: "hidden"
   },
+  dm: {
+      backgroundColor: "#41444B",
+      position: "absolute",
+      top: 20,
+      width: 40,
+      height: 40,
+      borderRadius: 20,
+      alignItems: "center",
+      justifyContent: "center"
+  },
+  active: {
+      backgroundColor: "#34FFB9",
+      position: "absolute",
+      bottom: 28,
+      left: 10,
+      padding: 4,
+      height: 20,
+      width: 20,
+      borderRadius: 10
+  },
+  add: {
+      backgroundColor: "#41444B",
+      position: "absolute",
+      bottom: 0,
+      right: 0,
+      width: 60,
+      height: 60,
+      borderRadius: 30,
+      alignItems: "center",
+      justifyContent: "center"
+  },
+  infoContainer: {
+      alignSelf: "center",
+      alignItems: "center",
+      marginTop: 16
+  },
+  statsContainer: {
+      flexDirection: "row",
+      alignSelf: "center",
+      marginTop: 32
+  },
+  statsBox: {
+      alignItems: "center",
+      flex: 1
+  },
+  mediaImageContainer: {
+      width: 180,
+      height: 200,
+      borderRadius: 12,
+      overflow: "hidden",
+      marginHorizontal: 10
+  },
+  mediaCount: {
+      backgroundColor: "#41444B",
+      position: "absolute",
+      top: "50%",
+      marginTop: -50,
+      marginLeft: 30,
+      width: 100,
+      height: 100,
+      alignItems: "center",
+      justifyContent: "center",
+      borderRadius: 12,
+      shadowColor: "rgba(0, 0, 0, 0.38)",
+      shadowOffset: { width: 0, height: 10 },
+      shadowRadius: 20,
+      shadowOpacity: 1
+  },
+  recent: {
+      marginLeft: 78,
+      marginTop: 32,
+      marginBottom: 6,
+      fontSize: 10
+  },
+  recentItem: {
+      flexDirection: "row",
+      alignItems: "flex-start",
+      marginBottom: 16
+  },
+  activityIndicator: {
+      backgroundColor: "#CABFAB",
+      padding: 4,
+      height: 12,
+      width: 12,
+      borderRadius: 6,
+      marginTop: 3,
+      marginRight: 20
+  }
 });
- 
-  
-  

@@ -8,6 +8,8 @@ export { default as Search } from './Search';
 export { default as Notification } from './Notification';
 export { default as Messages } from './Messages';
 export {default as ProfileScreen} from './ProfileScreen'
+export {default as Aboutus} from './ProfileScreen'
+
 
 
 

@@ -8,5 +8,6 @@ export const theme = {
     primary: '#600EE9',
     secondary: '#414757',
     error: '#f13a59',
+    aqua: '#00FFFF'
   },
 };

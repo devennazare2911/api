@@ -2,6 +2,20 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity ,Text } from 'react-native';
 import Firebase from '../../config/firebase';
+import { updateEmail, updatePassword, signup } from '../../actions/users';
+import {
+  BallIndicator,
+  BarIndicator,
+  DotIndicator,
+  MaterialIndicator,
+  PacmanIndicator,
+  PulseIndicator,
+  SkypeIndicator,
+  UIActivityIndicator,
+  WaveIndicator,
+} from 'react-native-indicators'; 
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import Background from '../components/Background';
 import Logo from '../components/Logo';
@@ -19,6 +33,7 @@ import { theme } from '../core/theme';
         password: ''
     }
     handleSignUp = () => {
+
       const { email, password } = this.state
       Firebase.auth()
           .createUserWithEmailAndPassword(email, password)
@@ -29,7 +44,7 @@ import { theme } from '../core/theme';
         return (
           <Background>
                <BackButton goBack={() => this.props.navigation.navigate('LoginScreen')} />
-               <Header>Create Account</Header>
+               <Header>Create Account !</Header>
 
               <Logo />
                 <TextInput
@@ -72,6 +87,8 @@ import { theme } from '../core/theme';
     }
 }
 
+
+
   const styles = StyleSheet.create({
     label: {
       color: '#cbd9df',
@@ -104,5 +121,4 @@ import { theme } from '../core/theme';
       backgroundColor: '#FFFFFF'
   },
   });
-
 export default RegisterScreen

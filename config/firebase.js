@@ -7,6 +7,7 @@ import {
     MESSAGE_SENDER_ID,
     APP_ID
 } from 'firebase';
+import 'firebase/firestore'
 
 
 const firebaseConfig = {
@@ -20,4 +21,10 @@ const firebaseConfig = {
 }
 
 let Firebase = firebase.initializeApp(firebaseConfig)
+export const db = firebase.firestore()
+
+// avoid deprecated warnings
+db.settings({
+})
+
 export default Firebase

@@ -4,15 +4,17 @@ import Logo from '../components/Logo';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import Paragraph from '../components/Paragraph';
-
 const HomeScreen = ({ navigation }) => (
+
+
+  
   <Background>
     <Logo />
-    <Header>The Digital Crew</Header>
-
+    <Header>GO DIGITAL 360 °</Header>
+{/* 
     <Paragraph>
-    GO DIGITAL 360 °
-    </Paragraph>
+    
+    </Paragraph> */}
     <Button mode="contained" onPress={() => navigation.navigate('LoginScreen')}>
       Login
     </Button>

@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "React Native Simple Login Template",
+    "name": "The Digital Crew",
     "slug": "react-native-simple-login-template",
     "privacy": "public",
     "sdkVersion": "35.0.0",
@@ -11,7 +11,7 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/tdc.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -26,7 +26,9 @@
     "ios": {
       "supportsTablet": true
     },
-    "description": "Simple login template created with React Native.",
-    "githubUrl": "https://github.com/venits/react-native-login-template"
+    "android": {
+      "package": "com.yourcompany.tdc"
+    },
+    "description": "Simple login template created with React Native."
   }
 }

@@ -11,8 +11,8 @@ import {
   Messages,
   Notfication,
   Search,
-  ProfileScreen
-  
+  ProfileScreen,
+  Aboutus
 
 } from './screens';
 
@@ -26,12 +26,13 @@ const Router = createStackNavigator(
     Profile,
     Messages,
     Search,
-    ProfileScreen
+    ProfileScreen,
+    Aboutus
 
 
   },
   {
-    initialRouteName: 'HomeScreen',
+    initialRouteName: 'Dashboard',
     headerMode: 'none',
   }
 );

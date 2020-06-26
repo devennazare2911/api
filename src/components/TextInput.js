@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: theme.colors.surface,
-    borderColor: theme.colors.surface,
+    borderColor: theme.colors.aqua,
     
   },
   error: {
